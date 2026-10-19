@@ -114,5 +114,14 @@ document.querySelectorAll('nav button').forEach(button=>{
  });
 });
 </script>
+	<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("VEAFLOW service worker registered"))
+      .catch(error => console.error("Service worker registration failed:", error));
+  });
+}
+	</script>
 </body>
 </html>
