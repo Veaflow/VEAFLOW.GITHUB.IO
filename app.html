@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101010">
+<title>VEAFLOW App</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:#fff;font-family:Arial,sans-serif}
+header{padding:24px 18px 18px;background:#171717;border-bottom:1px solid #333}
+.logo{font-size:29px;font-weight:900;letter-spacing:2px}
+.logo span{color:#f22}
+.tagline{color:#aaa;font-size:12px;margin-top:6px}
+main{padding:20px 16px 100px;max-width:650px;margin:auto}
+.welcome{background:linear-gradient(135deg,#310000,#191919 70%);border:1px solid #512020;border-radius:18px;padding:24px 20px;margin-bottom:24px}
+.welcome small{color:#ff7777;font-weight:bold;letter-spacing:2px}
+h1{font-size:27px;margin:12px 0}
+p{color:#bbb;line-height:1.5}
+.section-title{font-size:18px;margin:24px 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#1c1c1c;border:1px solid #333;border-radius:15px;padding:18px 14px;min-height:135px;color:white;text-align:left;cursor:pointer}
+.card:active{transform:scale(.98)}
+.icon{font-size:27px}
+.card h3{margin:12px 0 6px;font-size:16px}
+.card p{font-size:12px;margin:0}
+.badge{display:inline-block;color:#ff7777;background:#351414;border-radius:6px;padding:4px 7px;font-size:10px;margin-top:10px}
+#detail{display:none;background:#1c1c1c;padding:20px;border-radius:15px;margin-top:20px;border:1px solid #444}
+button.back{background:#f22;color:white;border:0;border-radius:8px;padding:10px 15px;font-weight:bold}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#171717;border-top:1px solid #333;padding:12px 3px calc(12px + env(safe-area-inset-bottom));}
+nav button{border:0;background:none;color:#aaa;font-size:11px;cursor:pointer;padding:5px}
+nav button span{display:block;font-size:20px;margin-bottom:4px}
+nav button.active{color:#ff3333}
+footer{text-align:center;color:#777;font-size:11px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span>VEA</span>FLOW</div>
+  <div class="tagline">THE FUTURE FLOWS THROUGH US.</div>
+</header>
+<main>
+  <section class="welcome">
+    <small>WELCOME TO VEAFLOW</small>
+    <h1>Technology that moves ideas forward.</h1>
+    <p>Explore entertainment, creativity, AI and communication in one connected experience.</p>
+  </section>
+
+  <h2 class="section-title">Explore VEAFLOW</h2>
+  <div class="grid">
+    <button class="card" data-name="VEAFLOW Play" data-desc="Discover videos, short dramas and entertainment. Video streaming will be connected in a future update.">
+      <div class="icon">🎬</div><h3>VEAFLOW Play</h3><p>Videos & entertainment</p><span class="badge">IN DEVELOPMENT</span>
+    </button>
+    <button class="card" data-name="VEAFLOW Social" data-desc="A place for posts, creators and communities. Social accounts and posting features will be added later.">
+      <div class="icon">🌐</div><h3>VEAFLOW Social</h3><p>People & communities</p><span class="badge">IN DEVELOPMENT</span>
+    </button>
+    <button class="card" data-name="VEAFLOW Studio" data-desc="A future workspace for creators to plan and manage their content.">
+      <div class="icon">🎥</div><h3>VEAFLOW Studio</h3><p>Create your stories</p><span class="badge">IN DEVELOPMENT</span>
+    </button>
+    <button class="card" data-name="VEAFLOW AI" data-desc="Explore future AI-powered creative tools for ideas, images and videos.">
+      <div class="icon">🤖</div><h3>VEAFLOW AI</h3><p>Creative AI tools</p><span class="badge">IN DEVELOPMENT</span>
+    </button>
+    <button class="card" data-name="VEAFLOW Connect" data-desc="Communication tools and messaging are planned for a future update.">
+      <div class="icon">💬</div><h3>VEAFLOW Connect</h3><p>Stay connected</p><span class="badge">IN DEVELOPMENT</span>
+    </button>
+  </div>
+
+  <section id="detail" aria-live="polite">
+    <h2 id="detail-title"></h2>
+    <p id="detail-text"></p>
+    <button class="back" id="back">Back to home</button>
+  </section>
+  <footer>© 2026 VEAFLOW · Built for the future.</footer>
+</main>
+<nav>
+  <button class="active" data-page="Home"><span>⌂</span>Home</button>
+  <button data-page="Play"><span>▶</span>Play</button>
+  <button data-page="Social"><span>◎</span>Social</button>
+  <button data-page="Studio"><span>✦</span>Studio</button>
+  <button data-page="Profile"><span>◉</span>Profile</button>
+</nav>
+<script>
+const detail=document.getElementById('detail');
+const title=document.getElementById('detail-title');
+const desc=document.getElementById('detail-text');
+function showPage(name,text){
+ title.textContent=name;
+ desc.textContent=text;
+ detail.style.display='block';
+ detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+document.querySelectorAll('.card').forEach(card=>{
+ card.addEventListener('click',()=>{
+  showPage(card.dataset.name,card.dataset.desc);
+ });
+});
+document.getElementById('back').addEventListener('click',()=>{
+ detail.style.display='none';
+});
+document.querySelectorAll('nav button').forEach(button=>{
+ button.addEventListener('click',()=>{
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  button.classList.add('active');
+  const page=button.dataset.page;
+  const descriptions={
+   Home:'Welcome to VEAFLOW.',
+   Play:'Video entertainment is planned for a future update.',
+   Social:'Social features are planned for a future update.',
+   Studio:'Creator tools are planned for a future update.',
+   Profile:'Your personal profile and account features will be added later.'
+  };
+  showPage(page,descriptions[page]);
+ });
+});
+</script>
+</body>
+</html>
