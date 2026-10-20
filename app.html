@@ -123,8 +123,14 @@ function showPage(name,text){
 }
 document.querySelectorAll('.card').forEach(card=>{
  card.addEventListener('click',()=>{
-  showPage(card.dataset.name,card.dataset.desc);
- });
+  if(card.dataset.name === 'VEAFLOW Profile'){
+    document.getElementById('detail').style.display='none';
+    document.getElementById('account').style.display='block';
+    document.getElementById('account').scrollIntoView({behavior:'smooth'});
+  } else {
+    showPage(card.dataset.name,card.dataset.desc);
+  }
+});
 });
 document.getElementById('back').addEventListener('click',()=>{
  detail.style.display='none';
