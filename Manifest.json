@@ -1,7 +1,7 @@
 {
   "name": "VEAFLOW",
   "short_name": "VEAFLOW",
-  "description": "The Future Flows Through Us.",
+  "description": "The Future Flows Through Us!",
   "start_url": "/app.html",
   "scope": "/",
   "display": "standalone",
