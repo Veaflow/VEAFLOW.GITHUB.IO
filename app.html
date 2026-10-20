@@ -77,6 +77,31 @@ footer{text-align:center;color:#777;font-size:11px;padding:20px}
     <p id="detail-text"></p>
     <button class="back" id="back">Back to home</button>
   </section>
+	<section id="account" style="display:none;">
+  <h2>VEAFLOW Accounts</h2>
+  <p>Create your profile and join the VEAFLOW community.</p>
+
+  <form id="account-form">
+    <label for="account-username">Username</label>
+    <input id="account-username" type="text"
+           placeholder="Choose a username" required>
+
+    <label for="account-email">Email address</label>
+    <input id="account-email" type="email"
+           placeholder="Enter your email" required>
+
+    <label for="account-password">Password</label>
+    <input id="account-password" type="password"
+           placeholder="Create a password"
+           minlength="8" required>
+
+    <button type="submit">Create Account</button>
+  </form>
+
+  <p>Already have an account?</p>
+  <button type="button" id="show-login">Log In</button>
+  <button type="button" id="account-back">Back to VEAFLOW</button>
+	</section>
   <footer>© 2026 VEAFLOW · Built for the future.</footer>
 </main>
 <nav>
