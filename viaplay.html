@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+
+  <title>VIAPLAY — Entertainment Without Limits</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #080b14;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      padding-bottom: 80px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 16px;
+      background: #080b14;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #168cff;
+    }
+
+    .profile {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #15233b;
+      display: grid;
+      place-items: center;
+      border: 1px solid #168cff;
+    }
+
+    .hero {
+      margin: 8px 16px 24px;
+      padding: 25px 20px;
+      min-height: 245px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-radius: 18px;
+      background:
+        linear-gradient(0deg, #080b14 0%, rgba(8,11,20,.2) 100%),
+        linear-gradient(135deg, #123c70, #121629 60%, #05060b);
+      border: 1px solid #1d3558;
+    }
+
+    .tag {
+      color: #48a7ff;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #c0c7d5;
+      line-height: 1.5;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .primary-btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 20px;
+      background: #168cff;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      width: fit-content;
+      cursor: pointer;
+    }
+
+    .section {
+      margin: 26px 16px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+      font-size: 19px;
+    }
+
+    .section-heading span {
+      color: #168cff;
+      font-size: 12px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 9px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+
+    .category {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 1px solid #273247;
+      background: #111827;
+      color: #dce5f5;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .category.active {
+      background: #168cff;
+      border-color: #168cff;
+      color: white;
+    }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .movie-card {
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #111827;
+      border: 1px solid #1d293b;
+    }
+
+    .poster {
+      height: 150px;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      background: linear-gradient(145deg, #183b61, #111827 75%);
+    }
+
+    .poster.two {
+      background: linear-gradient(145deg, #542e5e, #111827 75%);
+    }
+
+    .poster.three {
+      background: linear-gradient(145deg, #76502a, #111827 75%);
+    }
+
+    .poster.four {
+      background: linear-gradient(145deg, #17564e, #111827 75%);
+    }
+
+    .poster-label {
+      font-size: 11px;
+      padding: 5px 8px;
+      border-radius: 5px;
+      background: rgba(0, 0, 0, .45);
+    }
+
+    .movie-info {
+      padding: 12px;
+    }
+
+    .movie-info h3 {
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .movie-info p {
+      font-size: 12px;
+      color: #9caac0;
+    }
+
+    .watch-btn {
+      margin-top: 12px;
+      background: transparent;
+      color: #48a7ff;
+      border: 1px solid #24588d;
+      border-radius: 6px;
+      padding: 8px 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .empty-message {
+      display: none;
+      color: #aab6c9;
+      text-align: center;
+      padding: 25px 0;
+      grid-column: 1 / -1;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 4px calc(12px + env(safe-area-inset-bottom));
+      background: #0d1220;
+      border-top: 1px solid #1d293b;
+      z-index: 10;
+    }
+
+    .nav-item {
+      background: none;
+      border: none;
+      color: #8794aa;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .nav-item .icon {
+      font-size: 20px;
+    }
+
+    .nav-item.active {
+      color: #48a7ff;
+    }
+
+    .notice {
+      display: none;
+      margin-top: 15px;
+      color: #a8cfff;
+      font-size: 13px;
+    }
+
+    @media (min-width: 700px) {
+      .section, .hero {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .movie-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .poster {
+        height: 210px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">VIA<span>PLAY</span></div>
+    <div class="profile" aria-label="Profile">👤</div>
+  </header>
+
+  <section class="hero">
+    <div class="tag">YOUR ENTERTAINMENT WORLD</div>
+    <h1>Stories That Move You.</h1>
+    <p>Discover movies, drama series, short films and videos in one place.</p>
+    <button class="primary-btn" onclick="showMessage('Your featured video will appear here when we connect a video source.')">
+      ▶ Explore VIAPLAY
+    </button>
+    <div class="notice" id="notice" role="status"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <h2>Explore Categories</h2>
+    </div>
+
+    <div class="categories">
+      <button class="category active" data-category="all">All</button>
+      <button class="category" data-category="movies">Movies</button>
+      <button class="category" data-category="drama">Drama Series</button>
+      <button class="category" data-category="shorts">Short Videos</button>
+      <button class="category" data-category="comedy">Comedy</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <h2>Discover Entertainment</h2>
+      <span>VIAPLAY</span>
+    </div>
+
+    <div class="movie-grid" id="movieGrid">
+
+      <article class="movie-card" data-type="drama">
+        <div class="poster">
+          <span class="poster-label">DRAMA SERIES</span>
+        </div>
+        <div class="movie-info">
+          <h3>The Millionaire's Secret</h3>
+          <p>Drama · Series</p>
+          <button class="watch-btn" onclick="showMessage('The Millionaire’s Secret episodes will be added here.')">View Series</button>
+        </div>
+      </article>
+
+      <article class="movie-card" data-type="movies">
+        <div class="poster two">
+          <span class="poster-label">MOVIE</span>
+        </div>
+        <div class="movie-info">
+          <h3>Beyond the City</h3>
+          <p>Movie · Drama</p>
+          <button class="watch-btn" onclick="showMessage('The movie player will be connected here.')">▶ Watch</button>
+        </div>
+      </article>
+
+      <article class="movie-card" data-type="shorts">
+        <div class="poster three">
+          <span class="poster-label">SHORT FILM</span>
+        </div>
+        <div class="movie-info">
+          <h3>One Last Chance</h3>
+          <p>Short Film · Drama</p>
+          <button class="watch-btn" onclick="showMessage('The short-film player will be connected here.')">▶ Watch</button>
+        </div>
+      </article>
+
+      <article class="movie-card" data-type="comedy">
+        <div class="poster four">
+          <span class="poster-label">COMEDY</span>
+        </div>
+        <div class="movie-info">
+          <h3>Unexpected Trouble</h3>
+          <p>Comedy · Short Video</p>
+          <button class="watch-btn" onclick="showMessage('The comedy video player will be connected here.')">▶ Watch</button>
+        </div>
+      </article>
+
+      <p class="empty-message" id="emptyMessage">No titles in this category yet.</p>
+    </div>
+  </section>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-item active" data-page="home">
+      <span class="icon">⌂</span>
+      <span>Home</span>
+    </button>
+    <button class="nav-item" data-page="search">
+      <span class="icon">⌕</span>
+      <span>Search</span>
+    </button>
+    <button class="nav-item" data-page="shorts">
+      <span class="icon">▣</span>
+      <span>Shorts</span>
+    </button>
+    <button class="nav-item" data-page="saved">
+      <span class="icon">♡</span>
+      <span>My List</span>
+    </button>
+  </nav>
+
+  <script>
+    function showMessage(message) {
+      const notice = document.getElementById("notice");
+      notice.textContent = message;
+      notice.style.display = "block";
+    }
+
+    const categoryButtons = document.querySelectorAll(".category");
+    const movieCards = document.querySelectorAll(".movie-card");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    categoryButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        categoryButtons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        const selected = button.dataset.category;
+        let visibleCount = 0;
+
+        movieCards.forEach(card => {
+          const matches = selected === "all" || card.dataset.type === selected;
+          card.style.display = matches ? "block" : "none";
+          if (matches) visibleCount++;
+        });
+
+        emptyMessage.style.display = visibleCount ? "none" : "block";
+      });
+    });
+
+    document.querySelectorAll(".nav-item").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        const page = button.dataset.page;
+
+        if (page === "home") {
+          document.querySelector(".hero").scrollIntoView({ behavior: "smooth" });
+        } else if (page === "search") {
+          showMessage("Search will be added in the next development step.");
+        } else if (page === "shorts") {
+          document.querySelector('[data-category="shorts"]').click();
+          document.querySelector(".section-heading").scrollIntoView({ behavior: "smooth" });
+        } else if (page === "saved") {
+          showMessage("Your saved movies and series will appear here once favorites are implemented.");
+        }
+      });
+    });
+  </script>
+
+</body>
+    </html>
