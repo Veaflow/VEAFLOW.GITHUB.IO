@@ -426,6 +426,74 @@
       });
     });
   </script>
+<!-- VIAPLAY VIDEO PLAYER -->
+<div id="viaplay-player" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#050814;
+    color:white;
+    padding:20px;
+    box-sizing:border-box;
+    overflow-y:auto;
+">
+    <button onclick="closeViaplayPlayer()" style="
+        background:#17233d;
+        color:white;
+        border:none;
+        padding:12px 18px;
+        border-radius:8px;
+        font-size:16px;
+        margin-bottom:20px;
+    ">← Back</button>
 
+    <h2 id="viaplay-video-title">Now Playing</h2>
+
+    <video id="viaplay-video" controls playsinline style="
+        width:100%;
+        max-height:65vh;
+        background:black;
+        border-radius:12px;
+    ">
+        Your browser does not support video playback.
+    </video>
+
+    <p id="viaplay-video-message">
+        Choose a video to start watching.
+    </p>
+</div>
+
+<script>
+function openViaplayPlayer(title, videoUrl) {
+    const player = document.getElementById("viaplay-player");
+    const video = document.getElementById("viaplay-video");
+
+    document.getElementById("viaplay-video-title").textContent = title;
+    document.getElementById("viaplay-video-message").textContent =
+        "Loading video...";
+
+    video.pause();
+    video.src = videoUrl;
+    player.style.display = "block";
+    video.load();
+
+    video.play().then(() => {
+        document.getElementById("viaplay-video-message").textContent =
+            "Enjoy watching!";
+    }).catch(() => {
+        document.getElementById("viaplay-video-message").textContent =
+            "Tap the play button to start the video.";
+    });
+}
+
+function closeViaplayPlayer() {
+    const video = document.getElementById("viaplay-video");
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+    document.getElementById("viaplay-player").style.display = "none";
+}
+</script>
 </body>
     </html>
