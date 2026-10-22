@@ -192,9 +192,13 @@ document.querySelectorAll('.card').forEach(card=>{
     document.getElementById('detail').style.display='none';
     document.getElementById('account').style.display='block';
     document.getElementById('account').scrollIntoView({behavior:'smooth'});
-  } else {
-    showPage(card.dataset.name,card.dataset.desc);
+  } else if (card.dataset.name === 'VEAFLOW Play') {
+window.location.href = 'viaplay.html';
+} else {
+showPage(card.dataset.name,card.dataset.desc);
   }
+    
+			 
 });
 });
 document.getElementById('back').addEventListener('click',()=>{
