@@ -1,4 +1,4 @@
-const CACHE_NAME = "veaflow-v1";
+const CACHE_NAME = "veaflow-v2";
 const APP_FILES = [
   "/",
   "/app.html",
