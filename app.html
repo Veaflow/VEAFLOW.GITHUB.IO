@@ -206,14 +206,18 @@ document.querySelectorAll('nav button').forEach(button=>{
   button.classList.add('active');
   const page=button.dataset.page;
   const descriptions={
-   Home:'Welcome to VEAFLOW.',
-   Play:'Video entertainment is planned for a future update.',
-   Social:'Social features are planned for a future update.',
-   Studio:'Creator tools are planned for a future update.',
-   Profile:'Your personal profile and account features will be added later.'
-  };
-  showPage(page,descriptions[page]);
- });
+Home:'Welcome to VEAFLOW.',
+Play:'Opening VIAPLAY...',
+Social:'Social features are planned for a future update.',
+Studio:'Creator tools are planned for a future update.',
+Profile:'Your personal profile and account features will be added later.'
+};
+
+if(page === 'Play'){
+window.location.href='viaplay.html';
+} else {
+showPage(page,descriptions[page]);
+} });
 });
 </script>
 	<script>
