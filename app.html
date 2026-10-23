@@ -203,8 +203,8 @@ document.querySelectorAll('.card').forEach(card=>{
     document.getElementById('account').style.display='block';
     document.getElementById('account').scrollIntoView({behavior:'smooth'});
   } else if (card.dataset.name === 'VEAFLOW Play') {
-alert('VEAFLOW Play redirect code is running!');
-window.location.href = 'viaplay.html';
+window.location.replace('https://veaflow.github.io/viaplay.html');
+return;
 } else {
 showPage(card.dataset.name,card.dataset.desc);
   }
